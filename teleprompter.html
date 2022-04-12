@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Teleprompter</title>
+		
+		<!-- Theme jQuery -->
+		<script src="https://code.jquery.com/jquery-latest.js"></script>
+		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+
+		<style>
+		
+			body {
+				background: #111111;
+				padding: 0px;
+				margin: 0;
+			}
+
+			.speed {
+				background-color: lightgray;
+				font-size: 80px;
+				color:black;
+				margin: 0;
+				position: sticky;
+				width: 80px;
+				height: 12px;
+				top: 0px;
+				left: 0px;
+				font-family: courier;
+				z-index: 100;
+				font-size: 12px;
+				text-align: center;
+				vertical-align: middle;
+			}
+
+			p {
+				font-family: sans-serif;
+				font-size: 80px;
+				line-height: 120px;
+				margin-bottom: 60px;
+				color: rgba(255,255,255,0.9);
+				font-family: ratio, sans-serif;
+				font-style: normal;
+				font-weight: 500;
+				transition: all 0.2s;
+				white-space: pre-line; 
+				margin: 0 80px 0 80px;
+				&:focus {
+					outline: none;
+				};
+			}			
+		</style>		
+	</head>
+    
+	<body >
+
+		<div class="speed" id="speed">000</div>
+		<p id="text">Error: Text can't load!</p>
+		
+		
+		
+		<script>
+			console.warn('Telepromter Version 1.0');
+
+
+			$(window).scrollTop(0);
+
+			let play = true;
+			let currentScroll = 0;
+			let speed = 0;
+			
+			let arg_speed = getUrlParameter('speed');
+			let arg_file  = getUrlParameter('file');
+			
+			if (arg_speed) speed = parseInt(arg_speed); else speed = 35;
+			if (arg_file)  file  = arg_file; else file = '';
+
+			let scroller = setInterval(scroll, speed);
+			$("#speed").html("Speed:"+speed);
+			
+
+			document.addEventListener("keydown", keyDownTextField, false);
+			
+			// Text laden
+			$.ajax({ url : file,
+				success : function (data) {
+					$("#text").html(data);
+				}
+			});
+			
+			function scroll() {
+				if(play == true) {
+					currentScroll = $(window).scrollTop();
+					if($(window).scrollTop() + $(window).height() == $(document).height()) {
+						$(window).scrollTop(0);
+					} else {
+						$(window).scrollTop(currentScroll+1);
+					}
+				}
+				// console.log(scroller);
+			};
+
+			//
+			//  keyDownTextField()
+			//
+			function keyDownTextField(e) {
+				var keyCode = e.keyCode;
+				if(keyCode == 192) {
+					event.preventDefault();
+					play = !play;
+					return false;
+				} 
+				
+				if(keyCode == 187) { // +
+					console.log("Speed + ",speed);
+					clearInterval(scroller);
+					speed = speed - 1;
+					if (speed < 1) speed = 1;
+					scroller = setInterval(scroll, speed);
+					$("#speed").html("Speed:"+speed);
+				} 
+				if(keyCode == 189) { // -
+					console.log("Speed -", speed);
+					clearInterval(scroller);
+					speed = speed + 1;
+					if (speed > 400) speed = 400;
+					scroller = setInterval(scroll, speed);
+					$("#speed").html("Speed:"+speed);
+				}
+
+				if(keyCode == 70) { // F
+					fullscreen();
+				}
+			};
+
+			//
+			//  fullscreen()
+			//
+			function fullscreen(){
+				let elem = document.getElementsByTagName("body")[0];
+				
+				if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement){
+					
+					if(elem.requestFullscreen){
+						elem.requestFullscreen();
+					} else if(elem.msRequestFullscreen){
+						elem.msRequestFullscreen();
+					} else if(elem.mozRequestFullScreen){
+						elem.mozRequestFullScreen();
+					} else if(elem.webkitRequestFullscreen){
+						elem.webkitRequestFullscreen(elem.ALLOW_KEYBOARD_INPUT);
+					}
+				} else {
+					
+					if(document.exitFullscreen){
+						document.exitFullscreen();
+					} else if(document.msExitFullscreen){
+						document.msExitFullscreen();
+					} else if(document.mozCancelFullScreen){
+						document.mozCancelFullScreen();
+					} else if(document.webkitExitFullscreen){
+						document.webkitExitFullscreen();
+					}
+				}
+			}
+			
+			//
+			//  getUrlParameter()
+			//
+			function getUrlParameter(par) {
+				var value='';
+				var UrlParameter = window.location.search;
+				if(UrlParameter != "") {
+					var i = UrlParameter.indexOf(par+"=");
+					if(i >= 0) {
+						i = i+par.length+1;
+						var k = UrlParameter.indexOf("&", i);
+						if(k < 0) {
+							k = UrlParameter.length;
+						}
+						value = UrlParameter.substring(i, k);
+						for(i=0; i < value.length; i++) {					
+							if(value.charAt(i) == '+') {						
+								value=value.substring(0, i)+" "+value.substring(i+1,value.length);
+							}
+						}
+						value=unescape(value);
+					}
+				}
+				console.log(par, value);			
+				return value;
+			};
+
+		</script>
+</body>
+</html>
+		
+		
+		
+		
