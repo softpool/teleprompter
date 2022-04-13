@@ -18,4 +18,6 @@ Aufruf:
 
 Umgebung:
 
-  Die Anwendung wurde mit Google Chrome getestet.
+  Die Anwendung wurde mit Google Chrome und Opera erfolgreich getestet.
+  
+  Firefox und Edge funktionieren nicht!
