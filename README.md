@@ -1,3 +1,4 @@
+[text2.txt](https://github.com/softpool/teleprompter/files/8479190/text2.txt)
 # teleprompter.html
 
 Diese Browseranwendung erlaubt es beliebieg Text zeilenweise über den Bildschirm laufen zu lassen.
