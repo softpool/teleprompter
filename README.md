@@ -9,7 +9,8 @@ Steuerung:
 Aufruf: 
   teleprompter.html?file=text1.txt&speed=30
   
-  speed kann Werte zwischen 1 und 100 annehmen
+  GET Parameter speed   Geschwindigkeit zwischen 1 und 100
+  GET Parameter file    Dateiname der anzuzeigenden Datei (nur Textdaten)
 
 Umgebung:
   Die Anwendung wurde mit Google Chrome getestet.
