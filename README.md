@@ -1,10 +1,14 @@
 # teleprompter.html
 
-Diese Browseranwendung erlaubt es Text anzuzeigen die über den Bildschirm laufen.
-Mit den Tasten +/- kann die Geschwindigkeit angepasset werden, die Taste p pausiert den Text.
+Diese Browseranwendung erlaubt es beliebieg Text zeilenweise über den Bildschirm laufen zu lassen.
 
-Aufruf: teleprompter.html?file=text1.txt&speed=30
+Steuerung:
+  Mit den Tasten +/- kann die Geschwindigkeit angepasset werden, die Taste p pausiert den Text.
 
-Die Anwendung habe läuft unter Google Chrome bestens.
+Aufruf: 
+  teleprompter.html?file=text1.txt&speed=30
+
+Umgebung:
+  Die Anwendung wurde mit Google Chrome getestet.
 
 
