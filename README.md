@@ -1,3 +1,4 @@
+![Bildschirmfoto 2021-11-24 um 11 13 17](https://user-images.githubusercontent.com/24750949/163125812-115b7f23-c0f0-4022-8272-4561444e1b2b.png)
 [text2.txt](https://github.com/softpool/teleprompter/files/8479190/text2.txt)
 # teleprompter.html
 
