@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/24750949/163127042-fabd521e-37de-4aaf-8600-6493bc5b8c5f.png)
 # teleprompter.html
 
 Diese Browseranwendung erlaubt es beliebieg Text zeilenweise über den Bildschirm laufen zu lassen.
